@@ -1,7 +1,6 @@
 package com.curso.ecommerce.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,7 +77,15 @@ public class HomeController {
 		detalleOrden.setTotal(producto.getPrecio()*cantidad);
 		detalleOrden.setProducto(producto);
 		
-		detalles.add(detalleOrden);
+		
+		//Validar que el mismo producto no se añada 2 veces
+		
+		Integer idProducto = producto.getId();
+		boolean ingresado = detalles.stream().anyMatch(p -> p.getProducto().getId()==idProducto);
+		
+		if (!ingresado) {
+			detalles.add(detalleOrden);
+		}
 		
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
 		
@@ -119,6 +126,17 @@ public class HomeController {
 		
 		return "usuario/carrito";
 	}
+	
+	@GetMapping("/getCart")
+	public String getCart(Model model) {
+		
+		
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		return "/usuario/carrito";
+	}
+	
 }
 
 
