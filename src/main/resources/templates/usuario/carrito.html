@@ -70,7 +70,7 @@
 
             <ul class="list-group">
               <li class="list-group-item"><h5 th:text="${orden.total}"></h5></li>
-              <a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
+              <a th:href="@{/order}" class="btn btn-dark">Ver Orden</a>
             </ul>
           </div>
 
@@ -80,7 +80,7 @@
     <!-- /.container -->
 
 	<!-- Footer -->
-	<div th:include="usuario/template_usuario.html::footer">
+	<div th:include="usuario/template_usuario.html::footer"></div>
 			
 			
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
